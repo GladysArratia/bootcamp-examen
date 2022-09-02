@@ -1,0 +1,25 @@
+select rut, Estudiante.nombre, apellido_pat, apellido_mat, codigo_curso, Comuna.nombre
+from Estudiante 
+inner join Comuna
+on Estudiante.codigo_comuna = Comuna.codigo_comuna 
+where codigo_curso = '0012'
+
+
+select codigo_curso, fecha_inicio, fecha_termino, Plan_Formativo.descripcion, Plan_Formativo.duracion_horas
+from Curso
+inner join Plan_Formativo
+on Curso.codigo_plan_formativo = Plan_Formativo.codigo_plan_formativo
+
+
+select Plan_Formativo.descripcion, COUNT(Modulo.descripcion) as cantidad
+from Plan_Modulo
+inner join Plan_Formativo on Plan_Formativo.codigo_plan_formativo = Plan_Formativo.codigo_plan_formativo
+inner join Modulo on Plan_Modulo.codigo_modulo = Modulo.codigo_modulo
+group by Plan_Formativo.descripcion
+
+
+select Plan_Formativo.codigo_plan_formativo, Plan_Formativo.descripcion, Modulo.codigo_modulo, Modulo.descripcion
+from Plan_Modulo
+inner join Plan_Formativo on Plan_Formativo.codigo_plan_formativo = Plan_Modulo.codigo_plan_formativo
+inner join Modulo on Plan_Modulo.codigo_modulo = Modulo.codigo_modulo
+where Plan_Formativo.descripcion like '%fullStack%'
